@@ -16,10 +16,17 @@ class TriviaViewController: UIViewController {
     @IBOutlet weak var answer2Button: UIButton!
     @IBOutlet weak var answer3Button: UIButton!
     @IBOutlet weak var answer4Button: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showQuestion()
+        resetButton.isHidden = false
+        triviaService.fetchQuestions { questions in
+            if let questions = questions {
+                self.questions = questions
+                self.showQuestion()
+            }
+        }
     }
     
     struct Question{
@@ -29,12 +36,8 @@ class TriviaViewController: UIViewController {
         let correctAnswerIndex: Int
     }
     
-    var questions: [Question] = [
-        Question(category: "Entertainment: Movies", text: "What position does Harry Potter play on the Quidditch Team?", answers: ["Chaser", "Keeper", "Seeker", "Beater"], correctAnswerIndex: 2),
-        Question(category: "Sports", text: "Who won the MLB world series in 2025?", answers: ["Dodgers", "Blue Jays", "Red Sox", "Yankees"], correctAnswerIndex: 0),
-        Question(category: "Geography", text: "What country is the Taj Mahal Located in?", answers: ["Spain", "India", "Italy", "Eqypt"], correctAnswerIndex: 1)
-    ]
-    
+    var questions: [Question] = []
+    let triviaService = TriviaQuestionService()
     var currentQuestionIndex = 0
     var score = 0
 
@@ -47,10 +50,20 @@ class TriviaViewController: UIViewController {
         
         questionTextLabel.text = currentQuestion.text
         
-        answer1Button.setTitle(currentQuestion.answers[0], for: .normal)
-        answer2Button.setTitle(currentQuestion.answers[1], for: .normal)
-        answer3Button.setTitle(currentQuestion.answers[2], for: .normal)
-        answer4Button.setTitle(currentQuestion.answers[3], for: .normal)
+        let answers = currentQuestion.answers
+
+        answer1Button.setTitle(answers[0], for: .normal)
+        answer2Button.setTitle(answers[1], for: .normal)
+
+        if answers.count > 2 {
+            answer3Button.setTitle(answers[2], for: .normal)
+            answer4Button.setTitle(answers[3], for: .normal)
+            answer3Button.isHidden = false
+            answer4Button.isHidden = false
+        } else {
+            answer3Button.isHidden = true
+            answer4Button.isHidden = true
+        }
         
     }
     
@@ -76,6 +89,23 @@ class TriviaViewController: UIViewController {
         }
     }
     
+    @IBAction func resetTapped(_ sender: UIButton) {
+        score = 0
+        currentQuestionIndex = 0
+        
+        answer1Button.isHidden = false
+        answer2Button.isHidden = false
+        answer3Button.isHidden = false
+        answer4Button.isHidden = false
+        
+        triviaService.fetchQuestions { questions in
+            if let questions = questions {
+                self.questions = questions
+                self.showQuestion()
+            }
+        }
+    }
+    
     func showFinalScore() {
         questionLabel.text = "You got \(score) out of \(questions.count) correct!"
         categoryLabel.text = "Game Over"
@@ -84,6 +114,8 @@ class TriviaViewController: UIViewController {
         answer2Button.isHidden = true
         answer3Button.isHidden = true
         answer4Button.isHidden = true
+        
+        resetButton.isHidden = false
     }
 }
 

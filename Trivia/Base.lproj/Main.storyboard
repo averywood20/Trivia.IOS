@@ -89,6 +89,14 @@
                                     <constraint firstAttribute="width" constant="240" id="Zhm-1z-Wvh"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZ7-bw-87X">
+                                <rect key="frame" x="163" y="689.66666666666663" width="67.333333333333314" height="34.333333333333371"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Reset"/>
+                                <connections>
+                                    <action selector="resetTapped:" destination="7Ge-oU-Wd4" eventType="touchUpInside" id="u6Q-G6-rwH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LL8-Ck-Cdx"/>
                         <color key="backgroundColor" red="0.76889430263820224" green="0.86078912019729614" blue="0.81306959638253318" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -98,6 +106,8 @@
                             <constraint firstItem="ZGb-Pu-mUa" firstAttribute="centerX" secondItem="Qcw-OE-7K6" secondAttribute="centerX" id="GWd-Kc-HGv"/>
                             <constraint firstItem="Fmk-Rw-fZ2" firstAttribute="top" secondItem="ZGb-Pu-mUa" secondAttribute="bottom" constant="10" id="Ho1-sH-hbZ"/>
                             <constraint firstItem="PSV-LU-qHy" firstAttribute="centerX" secondItem="Qcw-OE-7K6" secondAttribute="centerX" id="LNk-I0-AOD"/>
+                            <constraint firstItem="LL8-Ck-Cdx" firstAttribute="bottom" secondItem="pZ7-bw-87X" secondAttribute="bottom" constant="60" id="VGI-aA-Hby"/>
+                            <constraint firstItem="pZ7-bw-87X" firstAttribute="centerX" secondItem="Qcw-OE-7K6" secondAttribute="centerX" id="h1n-aG-bXR"/>
                             <constraint firstItem="ZGb-Pu-mUa" firstAttribute="top" secondItem="LL8-Ck-Cdx" secondAttribute="top" constant="20" id="htU-aN-zUi"/>
                             <constraint firstItem="DNM-nR-0X8" firstAttribute="top" secondItem="Fmk-Rw-fZ2" secondAttribute="bottom" constant="50" id="ojF-bc-Yug"/>
                             <constraint firstItem="Fmk-Rw-fZ2" firstAttribute="centerX" secondItem="Qcw-OE-7K6" secondAttribute="centerX" id="qA0-Fz-gYH"/>
@@ -112,6 +122,7 @@
                         <outlet property="questionLabel" destination="ZGb-Pu-mUa" id="NzC-12-Fvf"/>
                         <outlet property="questionTextLabel" destination="4kX-uq-ueC" id="xoa-dX-oFt"/>
                         <outlet property="questionView" destination="DNM-nR-0X8" id="eiD-Rd-VZZ"/>
+                        <outlet property="resetButton" destination="pZ7-bw-87X" id="9Vx-E7-NDx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6N-PA-Rlf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
